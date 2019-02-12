@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        
+      <div className="customBackground">
+        <h1>This is for checking git</h1>
       </div>
     );
   }

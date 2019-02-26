@@ -1,34 +1,33 @@
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 5000;
-
+// database link. 1. git ignore.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
+const data = fs.readFileSync('./database.json');
+const conf = JSON.parse(data);
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host:conf.host,
+  user: conf.user,
+  password: conf.password,
+  port: conf.port,
+  database: conf.database,
+});
+
+connection.connect();
+
 app.get('/api/customers', (req, res) => {
-    res.send([
-        {
-            id: 1,
-            image: 'https://placeimg.com/64/64/1',
-            name: 'test1',
-            age: '20',
-            job: 'Marketer',
-          },
-          {
-            id: 2,
-            image: 'https://placeimg.com/64/64/2',
-            name: 'test1',
-            age: '28',
-            job: 'Customs Specialist',
-          },
-          {
-            id: 3,
-            image: 'https://placeimg.com/64/64/3',
-            name: 'test1',
-            age: '30',
-            job: 'Programmer',
-          },
-    ]);
+    //res.send();
+    connection.query(
+      "SELECT * FROM CUSTOMER",
+      (err, rows, fields) => {
+        res.send(rows);
+      }
+    );
 });
 app.listen(port, () => console.log(`Listening on port ${port}`));

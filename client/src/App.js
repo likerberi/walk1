@@ -74,8 +74,8 @@ class App extends Component {
               return (
                 <Customer
                   key={obj.id}
-                  id={obj.id}
                   image={obj.image}
+                  id={obj.id}
                   name={obj.name}
                   age={obj.age}
                   job={obj.job} 

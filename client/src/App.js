@@ -25,10 +25,6 @@ const styles = theme => ({
   }
 })
 
-const customers = [
-
-]
-
 class App extends Component {
   // state cannot be changed in components.
   constructor(props) {
